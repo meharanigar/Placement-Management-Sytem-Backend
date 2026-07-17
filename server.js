@@ -1,6 +1,7 @@
 import express, { request, response } from "express";
 import studentRoutes from "./routes/studentRoutes.js";
 import connectDB from "./config/db.js";
+import dotenv from "dotenv";
 // old version:
 // const express = require("express");
 
@@ -8,6 +9,7 @@ const app = express();
 //middleware:convert the json to object
 app.use(express.json());
 connectDB()
+dotenv.config();
 
 
 //studentRoutes
