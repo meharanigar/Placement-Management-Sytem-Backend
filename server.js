@@ -1,44 +1,27 @@
-import express, { request, response } from "express";
+import express from "express";
+import dotenv from "dotenv";
 import studentRoutes from "./routes/studentRoutes.js";
 import connectDB from "./config/db.js";
-import dotenv from "dotenv";
-// old version:
-// const express = require("express");
-
+import cors from "cors";
 const app = express();
-//middleware:convert the json to object
-app.use(express.json());
-connectDB()
+
 dotenv.config();
 
 
-//studentRoutes
-// app.use("/students",studentRoutes);
-app.use("/students",studentRoutes);
 
+// Middleware
+app.use(express.json());
+app.use(cors());
 
-app.listen(8000,()=>{
-    console.log("server is started at 8000");
+// Connect to MongoDB
+connectDB();
 
-}); 
+// Routes
+app.use("/students", studentRoutes);
 
-// let students=[{
-//     id:101,
-//     studentName:"mehar",
-//     email:"mehar@gmail.com",
-//     Branch:"CAI",
-//     Cgpa:9
+// Start server
+const PORT = process.env.PORT || 8000;
 
-// }
-
-// ]
-
-// app.get("/",(req,res)=>{
-//     res.send("this is my backend")
-// });
-
-// app.get("/students",(req,res)=>{
-//     res.json(students);
-// });
-// //Defining the r
-
+app.listen(PORT, () => {
+  console.log(`Server is started at ${PORT}`);
+});

@@ -13,9 +13,9 @@ async function connectDB() {
     console.log("mongodb is connected ")
     }catch(error){
         console.log("Database connection fails")
-        console.log(error.message)
+        console.log(error)
     }
    
 
 }
-export default connectDB; 
+export default connectDB;

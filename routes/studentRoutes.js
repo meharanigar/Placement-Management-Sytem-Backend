@@ -25,6 +25,6 @@ router.post("/",addStudent);
 router.put("/:id",updateStudent);
 
 //Delete the students
-router.delete("/",deleteStudent)
+router.delete("/:id",deleteStudent)
 
 export default router;
