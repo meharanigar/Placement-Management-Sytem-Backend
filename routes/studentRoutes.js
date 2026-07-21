@@ -1,30 +1,32 @@
-import express from  "express";
+import express from "express";
+
 import {
-     getStudents,
-    getStudentsById, 
-    addStudent,
-    updateStudent,
-    deleteStudent
+  getStudents,
+  getStudentsById,
+  addStudent,
+  updateStudent,
+  deleteStudent,
+  searchStudents,
 } from "../controllers/studentController.js";
 
-
-//roter object 
 const router = express.Router();
 
-// router.get("/",getStudents);
-router.get("/",getStudents);
+// Search Students (Keep this BEFORE "/:id")
+router.get("/search", searchStudents);
 
-//getstudents by id
-router.get("/:id",getStudentsById)
+// Get All Students
+router.get("/", getStudents);
 
-//POST adding a student
+// Get Student By ID
+router.get("/:id", getStudentsById);
 
-router.post("/",addStudent);
+// Add Student
+router.post("/", addStudent);
 
-//PUT updating a student
-router.put("/:id",updateStudent);
+// Update Student
+router.put("/:id", updateStudent);
 
-//Delete the students
-router.delete("/:id",deleteStudent)
+// Delete Student
+router.delete("/:id", deleteStudent);
 
 export default router;

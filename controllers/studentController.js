@@ -114,3 +114,27 @@ export async function deleteStudent(req, res) {
     });
   }
 }
+
+// Search students
+export async function searchStudents(req, res) {
+  try {
+    const search = req.query.q || "";
+
+    const students = await Student.find({
+      studentName: {
+        $regex: search,
+        $options: "i",
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      students,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
