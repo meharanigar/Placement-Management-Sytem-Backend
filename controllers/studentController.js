@@ -44,7 +44,18 @@ export async function getStudentsById(req, res) {
 // Add student
 export async function addStudent(req, res) {
   try {
-    const student = await Student.create(req.body);
+    const { studentName, email, phone, Branch, Cgpa } = req.body;
+
+    const image = req.file ? req.file.filename : "";
+
+    const student = await Student.create({
+      studentName,
+      email,
+      phone,
+      Branch,
+      Cgpa,
+      image,
+    });
 
     res.status(201).json({
       success: true,
@@ -62,9 +73,15 @@ export async function addStudent(req, res) {
 // Update student
 export async function updateStudent(req, res) {
   try {
+    const updateData = { ...req.body };
+
+    if (req.file) {
+      updateData.image = req.file.filename;
+    }
+
     const student = await Student.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       {
         new: true,
         runValidators: true,
@@ -137,4 +154,4 @@ export async function searchStudents(req, res) {
       message: error.message,
     });
   }
-};
+}

@@ -13,6 +13,8 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 
+//multers 
+app.use("/uploads",express.static("uploads"))
 // Connect to MongoDB
 connectDB();
 
